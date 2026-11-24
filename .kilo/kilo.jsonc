@@ -1,0 +1,8 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  // "model": "openrouter/z-ai/glm-5.3",
+  // "model": "openrouter/z-ai/glm-flash-latest",
+  "model": "openrouter/poolside/laguna-s-2.1",
+  "default_agent": "Focused",
+  "reasoning_display": "preview"
+}

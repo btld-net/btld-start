@@ -1,0 +1,52 @@
+name: Testing with Playwright
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref || github.ref }}
+
+      # Enable the containerd image store on the Docker daemon so buildx's
+      # default "docker" driver shares an image store with the daemon.
+      # This eliminates the ~60s "exporting to docker image format" +
+      # "importing to docker" tarball round-trip that the docker-container
+      # driver (setup-buildx-action) imposes when using --load, and still
+      # allows BuildKit features like cache-to=type=gha.
+      - uses: docker/setup-docker-action@v5
+        with:
+          daemon-config: '{"features": {"containerd-snapshotter": true}}'
+
+      # Expose ACTIONS_RUNTIME_TOKEN / ACTIONS_CACHE_URL
+      # Without this, cache=gha silently no-ops and every layer is rebuilt.
+      - uses: crazy-max/ghaction-github-runtime@v4
+
+      - run: npm run test
+      
+      - name: Upload Playwright report
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          path: .github/report/
+          retention-days: 30
+          if-no-files-found: ignore
+
+      - name: Commit snapshots
+        if: always()
+        run: |
+          if [ -z "$(git status --porcelain .github/snapshots/)" ]; then
+            echo "No snapshot changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/snapshots/
+          git commit -m "chore: add playwright snapshots [skip ci]"
+          git push

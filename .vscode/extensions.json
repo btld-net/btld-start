@@ -1,0 +1,23 @@
+{
+  "recommendations": [
+    "kilocode.kilo-code",
+    "BeardedBear.beardedicons",
+    "GitHub.github-vscode-theme",
+    "dprint.dprint",
+    "christian-kohler.npm-intellisense",
+    "bashmish.es6-string-css",
+    "tobermory.es6-string-html"
+  ],
+  "unwantedRecommendations": [
+    "ms-azuretools.vscode-containers",
+    "DavidAnson.vscode-markdownlint",
+    "firefox-devtools.vscode-firefox-debug",
+    "ms-edgedevtools.vscode-edge-devtools",
+    "dbaeumer.vscode-eslint",
+    "donjayamanne.githistory",
+    "eamodio.gitlens",
+    "ms-vscode.notepadplusplus-keybindings",
+    "ms-vscode-remote.remote-containers",
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
+  ]
+}

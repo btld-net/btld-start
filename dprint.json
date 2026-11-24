@@ -1,0 +1,13 @@
+{
+  "bun": {
+    "printWidth": 120,
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true,
+    "proseWrap": "always",
+    "vueIndentScriptAndStyle": true,
+    "singleAttributePerLine": false,
+    "htmlWhitespaceSensitivity": "ignore"
+  },
+  "plugins": ["npm:@dprint/bun@0.0.4"]
+}

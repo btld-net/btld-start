@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-site-rueberg
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build -w site-rueberg
+
+      - name: Deploy to BunnyCDN
+        uses: ayeressian/bunnycdn-storage-deploy@v2.4.5
+        with:
+          source: "packages/site-rueberg/dist"
+          destination: ""
+          storageZoneName: "site-rueberg-eu"
+          storagePassword: "${{ secrets.BUNNY_PW_SITE_RUEBERG }}"
+          accessKey: "${{ secrets.BUNNY_API_KEY }}"
+          pullZoneId: "6389218"
+          upload: "true"
+          remove: "true"
+          purgePullZone: "true"
+          purgePullZoneDelay: "5"
+          maxRetries: "5"
