@@ -14,8 +14,7 @@
     "skipLibCheck": true,
     "strict": true,
     "paths": {
-      "@btld/core": ["../core/index.ts"],
-      "@btld/core/base": ["../core/base.ts"]
+      "@btld/core": ["../btld-core/src/index.ts"]
     }
   }
 }

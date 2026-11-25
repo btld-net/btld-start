@@ -26,7 +26,7 @@ const faviconInt = favicons({
   name: 'Rueberg Site',
   short_name: 'Rueberg',
   input: {
-    favicons: ['favicon.svg'],
+    favicons: ['docs/favicon.svg'],
   },
 });
 

@@ -1,0 +1,72 @@
+---
+import type { Graph, Person, ProfessionalService, BreadcrumbList, AboutPage, WebPage } from "schema-dts";
+
+// TEST with: https://search.google.com/test/rich-results
+// TEST with: https://search.google.com/search-console
+
+const fru: Person = {
+  "@type": "Person",
+  "@id": "https://rueberg.eu/#person-fru",
+  name: "Florian Rüberg",
+  url: "https://rueberg.eu/",
+  image: "https://rueberg.eu/json-ld-image-fru.jpg",
+  jobTitle: "Freelance Fullstack Developer",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Düsseldorf",
+    addressCountry: "Germany",
+  },
+  sameAs: [
+    "https://github.com/fru",
+    "https://www.linkedin.com/in/florian-rueberg",
+    "https://www.xing.com/profile/Florian_Rueberg",
+  ],
+  knowsAbout: ["Web Development", "C#", "Entity Framework", "ASP.NET Core", "Web Components", "Angular"],
+};
+
+const service: ProfessionalService = {
+  "@type": "ProfessionalService",
+  "@id": "https://rueberg.eu/#service",
+  name: "Florian Rüberg - Freelance Fullstack Developer",
+  description: "Freelance Fullstack Developer specializing in C#, .NET, and Angular.",
+  url: "https://rueberg.eu/",
+  image: "https://rueberg.eu/json-ld-image-fru.jpg",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Düsseldorf",
+    addressCountry: "Germany",
+  },
+  founder: fru,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Freelance Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "C# Backend Development",
+          description:
+            "Scalable, secure server-side solutions and RESTful APIs built with .NET and C# for robust enterprise performance.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Angular Frontend Development",
+          description:
+            "Dynamic, high-performance enterprise web applications featuring reactive architectures and sophisticated state management.",
+        },
+      },
+    ],
+  },
+};
+
+const root = {
+  "@context": "https://schema.org",
+  ...service,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(root)} />
