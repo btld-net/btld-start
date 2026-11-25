@@ -9,5 +9,5 @@ permissions:
 
 jobs:
   deploy:
-    uses: btld-net/btld-utils/.github/workflows/deploy-docs.yml@v1
+    uses: btld-net/btld-utils/.github/workflows/deploy-cdn-bunny.yml@v2
     secrets: inherit
