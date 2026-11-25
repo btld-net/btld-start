@@ -9,6 +9,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
 import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const sitemapInt = sitemap({ filter: (page) => !page.includes('/hidden/') });
 
@@ -26,7 +27,7 @@ const faviconInt = favicons({
   name: 'Rueberg Site',
   short_name: 'Rueberg',
   input: {
-    favicons: ['docs/favicon.svg'],
+    favicons: [fileURLToPath(import.meta.resolve('@btld/utils-doc-template/favicon.svg'))],
   },
 });
 
@@ -52,6 +53,12 @@ export default defineConfig({
         '@components': resolve(import.meta.dirname, './src/components'),
       },
     },
+
+    /*server: {
+      fs: {
+        allow: [resolve(import.meta.dirname), resolve(import.meta.dirname, '../btld-utils')],
+      },
+    },*/
 
     css: {
       transformer: 'lightningcss',

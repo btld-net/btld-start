@@ -1,7 +1,10 @@
 ---
-import BaseLayout from "../base-layout.astro";
+import Layout from "@btld/utils-doc-template/layout.astro";
+import Header from "../header.astro";
+import Footer from "../footer.astro";
 ---
 
-<BaseLayout title="rueberg.eu">
-  <div slot="footer"></div>
-</BaseLayout>
+<Layout title="rueberg.eu">
+  <Header slot="head" />
+  <Footer slot="footer" />
+</Layout>

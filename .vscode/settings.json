@@ -9,5 +9,5 @@
   "editor.defaultFormatter": "dprint.dprint",
   "[markdown][plaintext]": {
     "editor.wordWrap": "on"
-  }
+  },
 }

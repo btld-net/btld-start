@@ -1,5 +1,13 @@
 ---
-import type { Graph, Person, ProfessionalService, BreadcrumbList, AboutPage, WebPage } from "schema-dts";
+import { Font } from "astro:assets";
+import type {
+  Graph,
+  Person,
+  ProfessionalService,
+  BreadcrumbList,
+  AboutPage,
+  WebPage,
+} from "schema-dts";
 
 // TEST with: https://search.google.com/test/rich-results
 // TEST with: https://search.google.com/search-console
@@ -21,14 +29,22 @@ const fru: Person = {
     "https://www.linkedin.com/in/florian-rueberg",
     "https://www.xing.com/profile/Florian_Rueberg",
   ],
-  knowsAbout: ["Web Development", "C#", "Entity Framework", "ASP.NET Core", "Web Components", "Angular"],
+  knowsAbout: [
+    "Web Development",
+    "C#",
+    "Entity Framework",
+    "ASP.NET Core",
+    "Web Components",
+    "Angular",
+  ],
 };
 
 const service: ProfessionalService = {
   "@type": "ProfessionalService",
   "@id": "https://rueberg.eu/#service",
   name: "Florian Rüberg - Freelance Fullstack Developer",
-  description: "Freelance Fullstack Developer specializing in C#, .NET, and Angular.",
+  description:
+    "Freelance Fullstack Developer specializing in C#, .NET, and Angular.",
   url: "https://rueberg.eu/",
   image: "https://rueberg.eu/json-ld-image-fru.jpg",
   address: {
@@ -70,3 +86,15 @@ const root = {
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(root)} />
+<Font cssVariable="--font-jetbrains-mono" preload />
+<Font cssVariable="--font-jakarta-sans" preload />
+<script
+  defer
+  src="https://umami.rueberg.eu/script.js"
+  data-website-id="bff03240-3d78-4b9c-a4dd-562567d7bf2f"
+></script>
+<script
+  defer
+  src="https://umami.rueberg.eu/recorder.js"
+  data-website-id="bff03240-3d78-4b9c-a4dd-562567d7bf2f"
+></script>
