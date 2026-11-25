@@ -1,4 +1,3 @@
-// @ts-check
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
@@ -8,22 +7,24 @@ import robotsTxt from 'astro-robots-txt';
 import { defineConfig, fontProviders } from 'astro/config';
 import browserslist from 'browserslist';
 import { browserslistToTargets } from 'lightningcss';
-import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const sitemapInt = sitemap({ filter: (page) => !page.includes('/hidden/') });
+process.env.ASTRO_TELEMETRY_DISABLED = '1';
 
-const robotsInt = robotsTxt({
-  policy: [
-    {
-      userAgent: '*',
-      allow: '/',
-      disallow: ['/hidden/'],
-    },
-  ],
-});
+const integrations = [
+  sitemap({ filter: (page) => !page.includes('/hidden/') }),
+  robotsTxt({
+    policy: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/hidden/'],
+      },
+    ],
+  }),
+];
 
-const faviconInt = favicons({
+const favicon = favicons({
   name: 'Rueberg Site',
   short_name: 'Rueberg',
   input: {
@@ -31,55 +32,29 @@ const faviconInt = favicons({
   },
 });
 
-process.env.ASTRO_TELEMETRY_DISABLED = '1';
-
-// REFERENCE: https://astro.build/config
-
 export default defineConfig({
-  srcDir: 'docs',
   site: 'https://rueberg.eu',
+  srcDir: 'docs',
   output: 'static',
-  build: {
-    inlineStylesheets: 'always',
-  },
-  integrations: [sitemapInt, robotsInt, faviconInt, mdx(), icon()],
-  devToolbar: {
-    enabled: false,
-  },
+  integrations: [...integrations, favicon, mdx(), icon()],
+  build: { inlineStylesheets: 'always' },
+  devToolbar: { enabled: false },
   vite: {
-    resolve: {
-      alias: {
-        '@root': resolve(import.meta.dirname),
-        '@components': resolve(import.meta.dirname, './src/components'),
-      },
-    },
-
-    /*server: {
-      fs: {
-        allow: [resolve(import.meta.dirname), resolve(import.meta.dirname, '../btld-utils')],
-      },
-    },*/
-
+    plugins: [tailwindcss()],
     css: {
       transformer: 'lightningcss',
       lightningcss: {
-        targets: browserslistToTargets(
-          browserslist('baseline widely available'),
-        ),
+        targets: browserslistToTargets(browserslist('baseline widely available')),
       },
     },
-
     build: {
-      cssMinify: 'lightningcss',
-      cssTarget: 'es2022',
-      rollupOptions: {
+      rolldownOptions: {
         output: {
           assetFileNames: 'file/[name][extname]',
         },
       },
     },
-
-    plugins: [tailwindcss()],
+    resolve: { tsconfigPaths: true },
   },
   fonts: [
     {
