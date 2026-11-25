@@ -10,4 +10,9 @@
   "[markdown][plaintext]": {
     "editor.wordWrap": "on"
   },
+  "files.exclude": {
+    ".*": true,
+    "dist": true,
+    "node_modules": true
+  }
 }
