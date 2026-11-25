@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    // See: https://nodejs.org/api/typescript.html#type-stripping
+
+    "noEmit": true,
+    "target": "esnext",
+    "module": "nodenext",
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+
+    // Custom
+
+    "skipLibCheck": true,
+    "strict": true,
+    "paths": {
+      "@btld/core": ["../core/index.ts"],
+      "@btld/core/base": ["../core/base.ts"]
+    }
+  }
+}
