@@ -36,9 +36,11 @@ export default defineConfig({
   site: 'https://rueberg.eu',
   srcDir: 'docs',
   output: 'static',
-  integrations: [...integrations, favicon, mdx(), icon()],
-  build: { inlineStylesheets: 'always' },
   devToolbar: { enabled: false },
+  integrations: [...integrations, favicon, mdx(), icon()],
+  build: { 
+    inlineStylesheets: 'always'
+  },
   vite: {
     plugins: [tailwindcss()],
     css: {

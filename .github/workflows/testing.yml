@@ -1,9 +1,6 @@
 name: Testing with Playwright
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   testing:
     runs-on: ubuntu-latest
