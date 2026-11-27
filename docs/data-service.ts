@@ -6,8 +6,7 @@ export const service: WithContext<ProfessionalService> = {
   '@type': 'ProfessionalService',
   '@id': 'https://rueberg.eu/#service',
   name: 'Florian Rüberg - Freelance Fullstack Developer',
-  description:
-    'Freelance Fullstack Developer specializing in C#, .NET, and Angular.',
+  description: 'Freelance Fullstack Developer specializing in C#, .NET, and Angular.',
   url: 'https://rueberg.eu/',
   image: 'https://rueberg.eu/json-ld-image-fru.jpg',
   address: {
